@@ -1,0 +1,3 @@
+## prevent users to commit their personal RProject
+.Rproj.user
+*.Rproj
