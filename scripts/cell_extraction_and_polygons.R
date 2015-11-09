@@ -105,8 +105,8 @@ s.dat.all <- read.csv("../DATA/summits/summits_coordinates_all.csv",
 ## define a function to create pixels polygons ---------------------------------
 xy.pix.to.poly <- function(xy, res, proj4string = CRS("NA")){
   lapply(1:nrow(xy), function(i){
-    x_ <- xy[i, 1] + c(-res, res, res, -res, -res)
-    y_ <- xy[i, 2] + c(res, res, -res, -res, res)
+    x_ <- xy[i, 1] + c(-res, res, res, -res, -res) / 2
+    y_ <- xy[i, 2] + c(res, res, -res, -res, res) / 2
     xy_ <- data.frame(x = x_, y = y_)
     SpatialPolygons(list(Polygons(list(Polygon(xy_)), "poly")), proj4string = proj4string)
   })
@@ -160,7 +160,7 @@ names(casty.poly) <- s.dat.all$unique_id
 save(casty.poly, file = "casty.poly.RData")
 
 ## xoplakis data ------------------------------------------------------------------
-xoplakis.dat <- raster(xmn = -25, xmx = 40, ymn = 30, ymx = 70, res = 0.5,
+xoplakis.dat <- raster(xmn = -25, xmx = 40, ymn = 35, ymx = 70, res = 0.5,
                     crs = CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"),
                     vals = 0)
 ## save this reference grid on the hard drive
