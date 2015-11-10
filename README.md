@@ -1,4 +1,4 @@
-# SuMMITS downscaled data presentation
+# SUMMITS downscaled data presentation
 damien g. (damien.georges2 at gmail.com)  
 04/11/2015  
 ## What is this document for?
