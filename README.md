@@ -286,11 +286,11 @@ sds11 | Båtfjellet | 66.85974 | 15.6041295 | 1060.0
 sds12 | Becca_di_Nona | 45.68714 | 7.3660540 | 3142.0
 sds13 | Becca_di_Nona | 45.68729 | 7.3657700 | 3142.0
 sds14 | Beggistock_Vorgipfel | 46.84916 | 8.9363870 | 2587.0
-sds15 | Beinn | Hearsgarnich | 56.51020 | -4.5791400 | 1078.0
+sds15 | Beinn Hearsgarnich | 56.51020 | -4.5791400 | 1078.0
 sds16 | Belianska_kopa | 49.22722 | 20.2238880 | 1835.0
-sds17 | Ben | Lawers | 56.54556 | -4.2208330 | 1214.0
-sds18 | Ben | Lui | 56.39704 | -4.8111000 | 1130.0
-sds19 | Ben | More | 56.38638 | -4.5392670 | 1174.0
+sds17 | Ben Lawers | 56.54556 | -4.2208330 | 1214.0
+sds18 | Ben Lui | 56.39704 | -4.8111000 | 1130.0
+sds19 | Ben More | 56.38638 | -4.5392670 | 1174.0
 sds20 | Bentsjordtinden | 69.51551 | 18.6447032 | 1096.0
 sds21 | Berdalseken | 61.20294 | 7.9164609 | 1814.0
 sds22 | Bergheien | 69.04640 | 17.4059271 | 563.0
@@ -303,7 +303,7 @@ sds28 | Bueelenhorn | 46.67244 | 9.7664260 | 2808.0
 sds29 | BUHAIESCU | 47.58263 | 24.6324500 | 2221.0
 sds30 | Bukkehammaren | 61.47022 | 8.7072311 | 1910.0
 sds31 | Camoghe | 46.13486 | 9.0642130 | 2228.0
-sds32 | Camp | Cairn | 57.09029 | -3.8428500 | 904.0
+sds32 | Camp Cairn | 57.09029 | -3.8428500 | 904.0
 sds33 | Campbellryggen | 78.60000 | 16.7800000 | 862.0
 sds34 | Campo_Tencia | 46.42977 | 8.7259410 | 3072.0
 sds35 | Casanna | 46.85938 | 9.8281900 | 2557.0
@@ -318,18 +318,18 @@ sds43 | Chuepfenflue | 46.80736 | 9.7760740 | 2658.0
 sds44 | Chummer_Schwarzhorn | 46.77767 | 9.7425220 | 2759.0
 sds45 | Chummerhuereli | 46.77284 | 9.7535270 | 2600.0
 sds46 | Cima_Gana_Bianca | 46.46249 | 8.9716610 | 2842.0
-sds47 | Cime | Bianche | 45.92071 | 7.6951310 | 3014.0
-sds48 | Colle | Lago | Bianco | 45.64729 | 7.5950810 | 2340.0
+sds47 | Cime Bianche | 45.92071 | 7.6951310 | 3014.0
+sds48 | Colle Lago Bianco | 45.64729 | 7.5950810 | 2340.0
 sds49 | Corno_del_camoscio | 45.87311 | 7.8678400 | 3026.0
 sds50 | Corno_del_Camoscio | 45.87319 | 7.8694720 | 3026.0
 sds51 | Corno_di_Gesero | 46.18548 | 9.1312720 | 2227.0
 sds52 | Corona_di_Redorta | 46.37549 | 8.7322710 | 2804.0
-sds53 | Creag | Mhigeachaidh | 57.09889 | -3.8602770 | 742.0
-sds54 | Creag | Mhor | 56.48889 | -4.6138890 | 1047.0
-sds55 | Da | Wllane | 46.72748 | 10.9593000 | 3074.0
+sds53 | Creag Mhigeachaidh | 57.09889 | -3.8602770 | 742.0
+sds54 | Creag Mhor | 56.48889 | -4.6138890 | 1047.0
+sds55 | Da Wllane | 46.72748 | 10.9593000 | 3074.0
 sds56 | Dadatjkka | 66.45226 | 16.1700160 | 1213.0
 sds57 | Dadatjkka | 66.45226 | 16.1700160 | 1213.0
-sds58 | Do | Peniola | 46.38282 | 11.6054500 | 2463.0
+sds58 | Do Peniola | 46.38282 | 11.6054500 | 2463.0
 sds59 | Dømannknut | 69.86033 | 22.0520678 | 683.0
 sds60 | Dreggfjellet | 68.74409 | 19.6134272 | 1464.0
 sds61 | Elgen | 68.89375 | 16.2665309 | 534.0
@@ -346,7 +346,7 @@ sds71 | Fierras | 66.48998 | 15.9141210 | 1605.0
 sds72 | Finnkona | 69.41801 | 17.4345904 | 779.0
 sds73 | Flueela_Schwarzhorn | 46.73448 | 9.9375560 | 3146.0
 sds74 | Flueela_Weisshorn | 46.73581 | 9.9418100 | 3085.0
-sds75 | frihetsli | storfjellet | 68.77771 | 19.7122152 | 1091.0
+sds75 | frihetsli storfjellet | 68.77771 | 19.7122152 | 1091.0
 sds76 | Frondiella | 42.83280 | -0.2906000 | 3071.0
 sds77 | Frostdalsnosi | 61.19535 | 7.9903235 | 1536.0
 sds78 | Gmpiflue | 46.96417 | 9.8631620 | 2390.0
@@ -355,15 +355,15 @@ sds80 | Gatschieferspitz | 46.83222 | 9.9269400 | 2676.0
 sds81 | Gattytoppen | 78.28000 | 16.6600000 | 866.0
 sds82 | Gazzirola | 46.11774 | 9.0723720 | 2116.0
 sds83 | Gemsfairenstock | 46.86047 | 8.9178540 | 2972.0
-sds84 | Gerlachovsk? | ?tt | 49.16389 | 20.1341670 | 2654.0
-sds85 | Gerlachovskì | ?t¡t | 49.16389 | 20.1341670 | 2654.0
+sds84 | Gerlachovsk? ?tt | 49.16389 | 20.1341670 | 2654.0
+sds85 | Gerlachovskì ?t¡t | 49.16389 | 20.1341670 | 2654.0
 sds86 | Giewont | 49.25097 | 19.9330560 | 1894.0
 sds87 | Gïhacktkogel | 47.61389 | 15.1315200 | 2214.0
 sds88 | Gletscherducan | 46.67482 | 9.8301650 | 3020.0
 sds89 | Glittertinden | 61.65196 | 8.5261779 | 2472.0
 sds90 | GOLGOTA | 47.60050 | 24.6252700 | 2010.0
 sds91 | Gorihorn | 46.79533 | 9.9593430 | 2986.0
-sds92 | Gran | Facha | 42.80830 | -0.2378000 | 3005.0
+sds92 | Gran Facha | 42.80830 | -0.2378000 | 3005.0
 sds93 | Grand_Gabizos | 42.93094 | 0.2838000 | 2684.0
 sds94 | Grand_Vignemale | 42.77394 | 0.1473500 | 3298.0
 sds95 | Grannosi | 61.20887 | 7.9602029 | 1615.0
@@ -390,8 +390,8 @@ sds115 | Hlpy | 49.23667 | 20.2100000 | 2060.0
 sds116 | Hoch_Turm | 46.93222 | 8.9355640 | 2666.0
 sds117 | Huereli_Avers | 46.49332 | 9.5086100 | 2762.0
 sds118 | Igl_Compass | 46.58930 | 9.8231170 | 3016.0
-sds119 | Jah?ac¡ | ?t¡t | 49.21972 | 20.2119430 | 2230.0
-sds120 | Jah?ac | ?tt | 49.21972 | 20.2119430 | 2230.0
+sds119 | Jah?ac¡ ?t¡t | 49.21972 | 20.2119430 | 2230.0
+sds120 | Jah?ac ?tt | 49.21972 | 20.2119430 | 2230.0
 sds121 | Jah?acÃ_ÃtÃt | 49.21972 | 20.2119430 | 2230.0
 sds122 | Jatzhorn | 46.76583 | 9.8600320 | 2682.0
 sds123 | Kbrek_nord | 66.45702 | 16.0257970 | 1435.0
@@ -409,27 +409,27 @@ sds134 | Kbrek_nord | 66.45702 | 16.0257970 | 1435.0
 sds135 | Kbrek_s¿r | 66.45530 | 16.0235550 | 1425.0
 sds136 | Kolla | 62.29214 | 9.4866100 | 1651.0
 sds137 | Konussen | 78.32000 | 15.8300000 | 983.0
-sds138 | Kopa | Magury | 49.24861 | 20.0006390 | 1704.0
+sds138 | Kopa Magury | 49.24861 | 20.0006390 | 1704.0
 sds139 | Kr tka | 49.16306 | 20.0144400 | 2335.5
 sds140 | Kr¡?na | 49.18083 | 19.9497200 | 1918.6
 sds141 | Krekahaugen | 61.23548 | 7.9782702 | 1512.0
 sds142 | Krekanosi | 61.22951 | 7.9471918 | 1554.0
 sds143 | Krekanosi.S | 61.21899 | 7.9435027 | 1533.0
 sds144 | Krzesanica | 49.23169 | 19.9102220 | 2122.0
-sds145 | La | Ly | 46.03076 | 7.2491700 | 2360.0
-sds146 | Lago | Balena | 45.64030 | 7.5517440 | 2584.0
+sds145 | La Ly | 46.03076 | 7.2491700 | 2360.0
+sds146 | Lago Balena | 45.64030 | 7.5517440 | 2584.0
 sds147 | Lancebranlette | 45.68525 | 6.8571530 | 2938.0
 sds148 | Las_Sours | 46.50100 | 9.9280830 | 2979.0
 sds149 | LATNJACHORRU | 68.35533 | 18.5222400 | 1300.0
 sds150 | Lenzer_Horn | 46.70901 | 9.5950790 | 2906.0
 sds151 | Lifjellet | 68.68358 | 19.0313530 | 1051.0
-sds152 | Lomnick? | ?tt | 49.19583 | 20.2127780 | 2634.0
-sds153 | Lomnickì | ?t¡t | 49.19583 | 20.2127780 | 2634.0
+sds152 | Lomnick? ?tt | 49.19583 | 20.2127780 | 2634.0
+sds153 | Lomnickì ?t¡t | 49.19583 | 20.2127780 | 2634.0
 sds154 | Loppenosi | 61.17046 | 7.8974976 | 1612.0
 sds155 | Lundbohmfjell | 78.59000 | 14.4400000 | 480.0
 sds156 | Madone_Batnall | 46.30413 | 8.4405210 | 2748.0
 sds157 | Mattagaisi | 68.79769 | 19.1591029 | 1636.0
-sds158 | Meall | nan | Tarmachan | 56.52168 | -4.3016500 | 1043.0
+sds158 | Meall nan | Tarmachan | 56.52168 | -4.3016500 | 1043.0
 sds159 | Mederger_Flue | 46.79233 | 9.7501330 | 2706.0
 sds160 | Merciantaira | 44.50586 | 6.5253700 | 3293.0
 sds161 | Merciantaira | 44.84885 | 6.8823760 | 3293.0
@@ -438,13 +438,13 @@ sds163 | Middagshaugen | 67.50674 | 14.7636796 | 275.0
 sds164 | Minschuns | 46.64543 | 10.3379200 | 2519.0
 sds165 | Mittler_Wissberg | 46.48563 | 9.5291350 | 3002.0
 sds166 | Monne_de_Cauterets | 42.89361 | 0.1669420 | 2724.0
-sds167 | Mont | Brl | 46.02057 | 7.2013700 | 2550.0
+sds167 | Mont Brl | 46.02057 | 7.2013700 | 2550.0
 sds168 | Mont_Crammont | 45.76329 | 6.9464200 | 2737.0
 sds169 | Mont_FallÃre | 45.77541 | 7.1945100 | 3061.0
 sds170 | Mont_Fallre | 45.77541 | 7.1945100 | 3061.0
 sds171 | Mont_Valaisan | 45.66382 | 6.9022600 | 2891.0
 sds172 | Mont_Valier | 42.79748 | 1.0856700 | 2838.0
-sds173 | Monte | Schutto | 46.52470 | 11.8147800 | 2893.0
+sds173 | Monte Schutto | 46.52470 | 11.8147800 | 2893.0
 sds174 | Monte_Garone | 46.48775 | 10.0485160 | 3030.0
 sds175 | Monte_Marzo | 45.33448 | 7.3631800 | 2756.0
 sds176 | Monte_Marzo | 45.56245 | 7.6088480 | 2756.0
@@ -452,12 +452,12 @@ sds177 | Monte_Perdido | 42.67555 | 0.0343640 | 3345.0
 sds178 | Monte_Perdido | 42.67555 | 0.0343640 | 3355.0
 sds179 | Monte_Turbon | 42.41691 | 0.5053170 | 2492.0
 sds180 | Monte_Vago | 46.44070 | 10.0790340 | 3059.0
-sds181 | Mot | dal | Gajer | 46.69434 | 10.3311000 | 2796.6
-sds182 | Mot | sper | Chamana | Sesvenna | 46.73565 | 10.4286000 | 2424.0
+sds181 | Mot dal Gajer | 46.69434 | 10.3311000 | 2796.6
+sds182 | Mot sper Chamana Sesvenna | 46.73565 | 10.4286000 | 2424.0
 sds183 | Mot_dal_Gajer | 46.69440 | 10.3308120 | 2797.0
 sds184 | Muchetta | 46.67519 | 9.7320930 | 2623.0
-sds185 | Munt | Buffalora | 46.63856 | 10.2436400 | 2438.0
-sds186 | Munt | Chavagl | 46.64419 | 10.2340700 | 2542.0
+sds185 | Munt Buffalora | 46.63856 | 10.2436400 | 2438.0
+sds186 | Munt Chavagl | 46.64419 | 10.2340700 | 2542.0
 sds187 | Munt_Pers | 46.42142 | 9.9535550 | 3207.0
 sds188 | Napfspitze | 46.94015 | 11.7399530 | 2888.0
 sds189 | Negoiu | 45.58700 | 24.5557000 | 2535.0
@@ -495,12 +495,12 @@ sds220 | Pica_de_Canigo | 42.51910 | 2.4565000 | 2785.0
 sds221 | Pico_Bisaurin | 42.78848 | 0.6399580 | 2670.0
 sds222 | Pico_del_Aspe | 42.76347 | 0.5657890 | 2645.0
 sds223 | Pischahorn | 46.81389 | 9.9472730 | 2980.0
-sds224 | Piz | Costainas | 46.56224 | 10.4748800 | 3004.0
-sds225 | Piz | Cotschen/Ciantun | 46.54185 | 10.4572800 | 3026.0
-sds226 | Piz | Foraz | 46.69075 | 10.2767200 | 3092.0
-sds227 | Piz | Murtr | 46.64578 | 10.1417100 | 2836.0
-sds228 | Piz | Plazer | 46.70862 | 10.3880000 | 3104.0
-sds229 | Piz | Umbrail | 46.55096 | 10.4144300 | 3033.0
+sds224 | Piz Costainas | 46.56224 | 10.4748800 | 3004.0
+sds225 | Piz Cotschen/Ciantun | 46.54185 | 10.4572800 | 3026.0
+sds226 | Piz Foraz | 46.69075 | 10.2767200 | 3092.0
+sds227 | Piz Murtr | 46.64578 | 10.1417100 | 2836.0
+sds228 | Piz Plazer | 46.70862 | 10.3880000 | 3104.0
+sds229 | Piz Umbrail | 46.55096 | 10.4144300 | 3033.0
 sds230 | Piz_Alv | 46.44931 | 9.9995780 | 2975.0
 sds231 | Piz_Beverin | 46.65248 | 9.3579240 | 2998.0
 sds232 | Piz_Blaisun | 46.60317 | 9.8628890 | 3200.0
@@ -552,17 +552,17 @@ sds277 | Pizzo_del_Lago_Scuro | 46.46986 | 8.5756800 | 2648.0
 sds278 | Pizzo_del_Sole | 46.52506 | 8.7679110 | 2773.0
 sds279 | Pizzo_di_Gino | 46.12353 | 9.1446700 | 2245.0
 sds280 | Pizzo_Quadro | 46.29825 | 8.4278220 | 2792.0
-sds281 | Pointe | de | Boveire | 45.99452 | 7.2400300 | 3212.0
-sds282 | Pointe | du | Parc | 45.99798 | 7.2322700 | 2989.0
+sds281 | Pointe de Boveire | 45.99452 | 7.2400300 | 3212.0
+sds282 | Pointe du Parc | 45.99798 | 7.2322700 | 2989.0
 sds283 | Pollvartind | 69.17017 | 19.9721365 | 1275.0
-sds284 | Pra | Pelat | 45.65875 | 7.5481860 | 2790.0
+sds284 | Pra Pelat | 45.65875 | 7.5481860 | 2790.0
 sds285 | Prestkonetinden | 67.93244 | 15.0430759 | 646.0
 sds286 | Puig_de_Coma_Pedrosa | 42.59194 | 1.4441670 | 2946.0
 sds287 | Pulpito | 46.42357 | 8.5474930 | 2616.0
-sds288 | Punta | Acuta | 42.63758 | -0.0623218 | 2242.0
-sds289 | Punta | Custodia | 42.65004 | 0.0326600 | 2519.0
-sds290 | Punta | de | las | Olas | 42.66227 | 0.0539400 | 3022.0
-sds291 | Punta | Tobacor | 42.65514 | -0.0130900 | 2779.0
+sds288 | Punta Acuta | 42.63758 | -0.0623218 | 2242.0
+sds289 | Punta Custodia | 42.65004 | 0.0326600 | 2519.0
+sds290 | Punta de las Olas | 42.66227 | 0.0539400 | 3022.0
+sds291 | Punta Tobacor | 42.65514 | -0.0130900 | 2779.0
 sds292 | Punta_Nera | 45.58083 | 7.4631250 | 3064.0
 sds293 | Raduener_Rothorn | 46.72424 | 9.9464130 | 3022.0
 sds294 | Ragnaroek | 46.38368 | 11.5926700 | 2757.0
@@ -599,14 +599,14 @@ sds324 | Schiahorn | 46.81817 | 9.8040750 | 2709.0
 sds325 | Schollberg | 46.97498 | 9.8645050 | 2574.0
 sds326 | Scopi | 46.57171 | 8.8299040 | 3190.0
 sds327 | Scrigno_di_Poltrinone | 46.15007 | 9.1011740 | 1956.0
-sds328 | Sedielkov  | kopa | 49.14972 | 20.0205600 | 2061.3
+sds328 | Sedielkov  kopa | 49.14972 | 20.0205600 | 2061.3
 sds329 | Sentischhorn | 46.76619 | 9.9153720 | 2827.0
-sds330 | Sgoran | Dubh | Mor | 57.07972 | -3.8094440 | 1111.0
+sds330 | Sgoran Dubh Mor | 57.07972 | -3.8094440 | 1111.0
 sds331 | Sikkilsdalshoa | 61.50465 | 8.9643029 | 1778.0
 sds332 | Skauthoi | 61.62562 | 8.4454756 | 1993.0
-sds333 | Sl vkovskì | ?t¡t2 | 49.16611 | 20.1847220 | 2452.0
-sds334 | Slavkovsk? | ?tt | 49.16611 | 20.1847220 | 2452.0
-sds335 | Slavkovskì | ?t¡t | 49.16611 | 20.1847220 | 2452.0
+sds333 | Sl vkovskì ?t¡t2 | 49.16611 | 20.1847220 | 2452.0
+sds334 | Slavkovsk? ?tt | 49.16611 | 20.1847220 | 2452.0
+sds335 | Slavkovskì ?t¡t | 49.16611 | 20.1847220 | 2452.0
 sds336 | Slettningseggi | 61.23179 | 8.1095383 | 1524.0
 sds337 | Solitinden | 69.14965 | 18.7284066 | 689.0
 sds338 | Spiter | 61.61482 | 8.4400121 | 2033.0
@@ -625,7 +625,7 @@ sds350 | Sulzfluh | 47.01262 | 9.8396370 | 2817.0
 sds351 | Sur_Rau | 61.53356 | 8.5580711 | 2368.0
 sds352 | Surtningstinden | 61.53000 | 8.1764031 | 1997.0
 sds353 | Svartdalspiggan | 61.42207 | 8.5090540 | 2137.0
-sds354 | Szeroka | Jaworzy?ska | 49.20889 | 20.1363890 | 2210.0
+sds354 | Szeroka Jaworzy?ska | 49.20889 | 20.1363890 | 2210.0
 sds355 | TAlihorn_Avers | 46.47840 | 9.5614340 | 3164.0
 sds356 | TAllihorn_Davos | 46.74018 | 9.8664340 | 2684.0
 sds357 | TAllihorn_Safien | 46.64665 | 9.2384000 | 2856.0
@@ -645,7 +645,7 @@ sds370 | Tromsdalstinden | 69.60705 | 19.1463287 | 1238.0
 sds371 | Tschima_da_Flix | 46.52160 | 9.6997310 | 3301.0
 sds372 | Tverbotnhorn | 61.56464 | 8.2696106 | 2084.0
 sds373 | Tverraatindan | 61.61796 | 8.3381269 | 2302.0
-sds374 | Unknown | Hillock | 57.07944 | -3.8300000 | 978.0
+sds374 | Unknown Hillock | 57.07944 | -3.8300000 | 978.0
 sds375 | Unnamed | 61.18767 | 7.9285736 | 1653.0
 sds376 | Valbellahorn | 46.73985 | 9.7018050 | 2764.0
 sds377 | Valser_Horn | 46.56039 | 9.2083050 | 2886.0
@@ -655,11 +655,11 @@ sds380 | Varful_Parang_Mare | 45.34111 | 23.5405560 | 2519.0
 sds381 | Varful_Peleaga | 45.36610 | 22.8944000 | 2509.0
 sds382 | Vassatjokka_high | 68.36868 | 18.3188370 | 1590.0
 sds383 | Vassatjokka_low | 68.38478 | 18.2594530 | 1491.0
-sds384 | Velk  | kopa | 49.20056 | 19.9736100 | 2052.0
-sds385 | Vesle | Armodshokollen | 62.26210 | 9.6658200 | 1161.0
+sds384 | Velk  kopa | 49.20056 | 19.9736100 | 2052.0
+sds385 | Vesle Armodshokollen | 62.26210 | 9.6658200 | 1161.0
 sds386 | Veslekolla | 62.30665 | 9.4573000 | 1418.0
 sds387 | Veslfjellet | 61.50712 | 8.7538582 | 1743.0
-sds388 | Vestre | istinden | 68.98977 | 20.0141757 | 1397.0
+sds388 | Vestre istinden | 68.98977 | 20.0141757 | 1397.0
 sds389 | Vesuv | 78.07000 | 14.8300000 | 739.0
 sds390 | Vorderer_Eggstock | 46.96046 | 8.9800710 | 2449.0
 sds391 | Weihbrunnkogel | 47.62474 | 15.1628500 | 2065.0
@@ -674,8 +674,8 @@ sds399 | Zuetribistock | 46.85194 | 8.9440400 | 2645.0
 
 **note:** As you can see some sites have been replicated because of name encoding..
 
----
-title: "check_downscaled_mean_temperature.R"
-author: "dami"
+
+generated via: "check_downscaled_mean_temperature.R"
+author: "damien georges"
 date: "Tue Nov 10 15:52:21 2015"
----
+
