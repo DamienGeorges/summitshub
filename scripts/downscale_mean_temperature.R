@@ -45,7 +45,7 @@ dat.ref <- dat.ref %>% group_by(cru_cells) %>% mutate(cru_ref_id = first(unique_
 dat.ref <- dat.ref %>% group_by(xoplakis_cells) %>% mutate(xoplakis_ref_id = first(unique_id))
 
 ## check that sites matched
-sites.in.dat <- dat %>% filter(s1 == "cas", s2 == "wc") %>% select(s1Cell) %>% distinct
+sites.in.dat <- dat.comp %>% filter(s1 == "cas", s2 == "wc") %>% select(s1Cell) %>% distinct
 sites.in.dat.ref <- unique(dat.ref$casty_ref_id)
 all(as.character(sites.in.dat$s1Cell) == sites.in.dat.ref)
 
