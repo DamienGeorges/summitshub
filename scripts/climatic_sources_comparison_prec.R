@@ -179,8 +179,8 @@ comb.tab.out <- foreach(k = 1:nrow(comp.tab), .packages = c('raster'), .export =
   s2.ncell <- nrow(na.omit(s2.extr))
   s1.extr.mean <- rowMeans(s1.extr[, -1, drop = FALSE])
   s2.extr.mean <- rowMeans(s2.extr[, -1, drop = FALSE])
-  if(s1 == "wc") s1.extr.mean <- s1.extr.mean / 10
-  if(s2 == "wc") s2.extr.mean <- s2.extr.mean / 10
+  if(s1 == "wc") s1.extr.mean <- s1.extr.mean 
+  if(s2 == "wc") s2.extr.mean <- s2.extr.mean 
   s1.extr.sd <- sd(s1.extr.mean, na.rm = TRUE)
   s2.extr.sd <- sd(s2.extr.mean, na.rm = TRUE)
   s1.extr.full.mean <- mean(s1.extr.mean, na.rm = TRUE)

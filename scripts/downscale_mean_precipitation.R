@@ -16,9 +16,10 @@ rm(list = ls())
 ## load libraries --------------------------------------------------------------
 library(raster)
 library(rgdal)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+library(dplyr, lib.loc = "J:/People/Damien/R")
+library(tidyr, lib.loc = "J:/People/Damien/R")
+library(ggplot2, lib.loc = "J:/People/Damien/R")
+library(lazyeval, lib.loc = "J:/People/Damien/R")
 
 ## laod the climatic data comparaison table ------------------------------------
 dat.comp <- read.csv("comb.tab.out.prec.csv", stringsAsFactors = FALSE)
