@@ -10,7 +10,8 @@
 ##' @licence GPL 2.
 ##' ----------------------------------------------------------------------------
 
-setwd("J:/People/Damien/SUMMITS/WORKDIR")
+# setwd("J:/People/Damien/SUMMITS/WORKDIR")
+setwd("~/SUMMITS/WORKDIR/")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -35,11 +36,17 @@ dat.ref <- dat.ref %>% group_by(cru_cells) %>% mutate(cru_ref_id = first(unique_
 dat.ref <- dat.ref %>% group_by(xoplakis_cells) %>% mutate(xoplakis_ref_id = first(unique_id))
 
 ## load all climatic data we want to downscale ---------------------------------
-cru.dat <- stack("../DATA/climate/cru/cru_ts3.23.1901.2014.pre.dat.nc")
+cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.pre.dat.nc/cru_ts4.00.1901.2015.pre.dat.nc")
 names(cru.dat) <- sub(".[[:digit:]]+$", "", names(cru.dat))
+
+cas.files <- list.files("../DATA/climate/casty/indiv_raster_prec", "*.grd$", full.names = TRUE)
+cas.dat <- stack(cas.files)
+names(cas.dat) <- sub(".grd$", "", basename(cas.files))
 
 ## extract the summits climatic data from rasters ------------------------------
 cru.extr <- raster::extract(cru.dat, as.data.frame(dat.ref[, c("xcoord", "ycoord")]),
+                            method='simple', df = TRUE)
+cas.extr <- raster::extract(cas.dat, as.data.frame(dat.ref[, c("xcoord", "ycoord")]),
                             method='simple', df = TRUE)
 
 ## reshape extractions ---------------------------------------------------------
@@ -50,6 +57,14 @@ cru.extr.resh <- cru.extr %>% select(-ID) %>% bind_cols(dat.ref[, c("unique_id",
   mutate(year = as.numeric(sub("^X", "", sub(".[[:digit:]]{2}$", "", date_str))),
          period = as.numeric(sub("^X[[:digit:]]{4}.", "", date_str))) %>% 
   select(unique_id, clim_source, clim_source_ref_id, year, period, mean_pre)
+
+cas.extr.resh <- cas.extr %>% dplyr::select(-ID) %>% bind_cols(dat.ref[, c("unique_id", "casty_ref_id")]) %>%
+  mutate(clim_source = "cas", clim_source_ref_id = casty_ref_id) %>%
+  dplyr::select(-casty_ref_id) %>%
+  gather(key = date_str, value = mean_pre, -c(unique_id, clim_source, clim_source_ref_id)) %>%
+  mutate(year = as.numeric(sub("cas_", "", sub("([[:digit:]]{2})$", "", date_str))),
+         period = as.numeric(sub("cas_[[:digit:]]{4}", "", date_str))) %>% 
+  dplyr::select(unique_id, clim_source, clim_source_ref_id, year, period, mean_pre)
 
 ## save a copy of workspace
 save.image("workspace_backup.RData")
@@ -83,8 +98,12 @@ cru.extr.resh.season <- cru.extr.resh %>%
   group_by(unique_id, clim_source, clim_source_ref_id) %>%
   do(calc_season_mean(dsc = .))
 
+cas.extr.resh.season <- cas.extr.resh %>%
+  group_by(unique_id, clim_source, clim_source_ref_id) %>%
+  do(calc_season_mean(dsc = .))
+
 ## merge all the climatic extractions ------------------------------------------
-clim.exrt <- bind_rows(cru.extr.resh, cru.extr.resh.season)
+clim.exrt <- bind_rows(cru.extr.resh, cru.extr.resh.season, cas.extr.resh, cas.extr.resh.season)
 
 ## write the climatic extractions on the harddrive -----------------------------
 write.csv(clim.exrt, file = "../OUTPUTS/summits_raw_prec.csv", quote = FALSE, row.names = FALSE)

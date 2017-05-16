@@ -13,7 +13,9 @@
 ##' @licence GPL 2.
 ##' ----------------------------------------------------------------------------
 
-setwd("J:/People/Damien/SUMMITS/WORKDIR")
+## setwd("J:/People/Damien/SUMMITS/WORKDIR")
+setwd("~/SUMMITS/WORKDIR/")
+
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -23,84 +25,92 @@ library(dplyr)
 library(tidyr)
 
 
-## merge all summits location data ---------------------------------------------
-
-##' @note cause several people are interested in the past downscalled data we 
-##'   will apply the downscalling procedure to Signe (sUMMITDiv project), Manuel
-##'   and Aino summits locations
-
-s.dat.signe <- read.csv("../DATA/summits/summits_coordinates_signe.csv",
-                        stringsAsFactors = FALSE, sep = ";", quote = '"',
-                        dec = ",")
-head(s.dat.signe)
-s.dat.manuel <- read.csv("../DATA/summits/summits_coordinates_manuel.csv",
-                         stringsAsFactors = FALSE, sep = ",", quote = '"', 
-                         row.names = 1)
-head(s.dat.manuel)
-s.dat.aino <- read.csv("../DATA/summits/summits_coordinates_aino.csv",
-                         stringsAsFactors = FALSE, sep = ",", quote = '')
-head(s.dat.aino)
-
-##' @note Signe's data didn't have the year of sampling info. Lets extract it 
-##'   from the species linked dataset
-
-spe.dat.signe <- read.csv("../DATA/summits/species_signe.csv",
-                          stringsAsFactors = FALSE, sep = ";", quote = '"',
-                          dec = ",")
-head(spe.dat.signe)
-## keep only needed info
-s.dat.signe.year <- spe.dat.signe %>%
-  select(mountain_name, year_of_record) %>%
-  group_by(mountain_name) %>%
-  summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
-            last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
-  ungroup
-head(s.dat.signe.year) 
-## merge this table with Signe original one
-s.dat.signe <- s.dat.signe %>% 
-  left_join(s.dat.signe.year) %>%
-  select(mountain_name, first_year_of_record, last_year_of_record,
-         ycoord, xcoord, mtn_altitude)
-
-## rearrange Manuel and Aino datasets
-s.dat.manuel <- s.dat.manuel %>%
-  group_by(mountain_name, ycoord, xcoord, mtn_altitude) %>%
-  summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
-            last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
-  ungroup %>%
-  select(mountain_name, first_year_of_record, last_year_of_record,
-         ycoord, xcoord, mtn_altitude)
-
-s.dat.aino <- s.dat.aino %>%
-  group_by(mountain_name, ycoord, xcoord, mtn_altitude) %>%
-  summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
-            last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
-  ungroup %>%
-  select(mountain_name, first_year_of_record, last_year_of_record,
-         ycoord, xcoord, mtn_altitude)
-
-## merge all datasets
-s.dat.all <- s.dat.signe %>% bind_rows(s.dat.manuel) %>% bind_rows(s.dat.aino) %>%
-  group_by(mountain_name, ycoord, xcoord, mtn_altitude) %>%
-  summarise(first_year_of_record = min(first_year_of_record, na.rm = TRUE),
-            last_year_of_record = max(last_year_of_record, na.rm = TRUE)) %>%
-  ungroup %>% distinct %>% as.data.frame
-
-head(s.dat.all)
-dupl.sites <- unique(s.dat.all$mountain_name[duplicated(s.dat.all$mountain_name)])
-s.dat.all[is.element(s.dat.all[, 'mountain_name'], dupl.sites), ] %>% arrange(mountain_name)
-## 12 sites are duplicated (same name but diff in x, y or alti)
-
-s.dat.all <- s.dat.all %>% arrange(mountain_name) %>% mutate(unique_id = paste0("sds", 1:nrow(s.dat.all)))
-
-
-## save the merged summits table on hard drive 
-write.csv(s.dat.all, file = "../DATA/summits/summits_coordinates_all.csv", row.names = FALSE)
+# ## merge all summits location data ---------------------------------------------
+# 
+# ##' @note cause several people are interested in the past downscalled data we 
+# ##'   will apply the downscalling procedure to Signe (sUMMITDiv project), Manuel
+# ##'   and Aino summits locations
+# 
+# s.dat.signe <- read.csv("../DATA/summits/summits_coordinates_signe.csv",
+#                         stringsAsFactors = FALSE, sep = ";", quote = '"',
+#                         dec = ",")
+# head(s.dat.signe)
+# s.dat.manuel <- read.csv("../DATA/summits/summits_coordinates_manuel.csv",
+#                          stringsAsFactors = FALSE, sep = ",", quote = '"', 
+#                          row.names = 1)
+# head(s.dat.manuel)
+# s.dat.aino <- read.csv("../DATA/summits/summits_coordinates_aino.csv",
+#                          stringsAsFactors = FALSE, sep = ",", quote = '')
+# head(s.dat.aino)
+# 
+# ##' @note Signe's data didn't have the year of sampling info. Lets extract it 
+# ##'   from the species linked dataset
+# 
+# spe.dat.signe <- read.csv("../DATA/summits/species_signe.csv",
+#                           stringsAsFactors = FALSE, sep = ";", quote = '"',
+#                           dec = ",")
+# head(spe.dat.signe)
+# ## keep only needed info
+# s.dat.signe.year <- spe.dat.signe %>%
+#   select(mountain_name, year_of_record) %>%
+#   group_by(mountain_name) %>%
+#   summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
+#             last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
+#   ungroup
+# head(s.dat.signe.year) 
+# ## merge this table with Signe original one
+# s.dat.signe <- s.dat.signe %>% 
+#   left_join(s.dat.signe.year) %>%
+#   select(mountain_name, first_year_of_record, last_year_of_record,
+#          ycoord, xcoord, mtn_altitude)
+# 
+# ## rearrange Manuel and Aino datasets
+# s.dat.manuel <- s.dat.manuel %>%
+#   group_by(mountain_name, ycoord, xcoord, mtn_altitude) %>%
+#   summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
+#             last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
+#   ungroup %>%
+#   select(mountain_name, first_year_of_record, last_year_of_record,
+#          ycoord, xcoord, mtn_altitude)
+# 
+# s.dat.aino <- s.dat.aino %>%
+#   group_by(mountain_name, ycoord, xcoord, mtn_altitude) %>%
+#   summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
+#             last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
+#   ungroup %>%
+#   select(mountain_name, first_year_of_record, last_year_of_record,
+#          ycoord, xcoord, mtn_altitude)
+# 
+# ## merge all datasets
+# s.dat.all <- s.dat.signe %>% bind_rows(s.dat.manuel) %>% bind_rows(s.dat.aino) %>%
+#   group_by(mountain_name, ycoord, xcoord, mtn_altitude) %>%
+#   summarise(first_year_of_record = min(first_year_of_record, na.rm = TRUE),
+#             last_year_of_record = max(last_year_of_record, na.rm = TRUE)) %>%
+#   ungroup %>% distinct %>% as.data.frame
+# 
+# head(s.dat.all)
+# dupl.sites <- unique(s.dat.all$mountain_name[duplicated(s.dat.all$mountain_name)])
+# s.dat.all[is.element(s.dat.all[, 'mountain_name'], dupl.sites), ] %>% arrange(mountain_name)
+# ## 12 sites are duplicated (same name but diff in x, y or alti)
+# 
+# s.dat.all <- s.dat.all %>% arrange(mountain_name) %>% mutate(unique_id = paste0("sds", 1:nrow(s.dat.all)))
+# 
+# 
+# ## save the merged summits table on hard drive 
+# write.csv(s.dat.all, file = "../DATA/summits/summits_coordinates_all.csv", row.names = FALSE)
 
 
 ## laod the merged version of summits locations --------------------------------
-s.dat.all <- read.csv("../DATA/summits/summits_coordinates_all.csv",
-                        stringsAsFactors = FALSE) 
+s.dat.all <- read.csv("../DATA/summits/mountains.csv",
+                        stringsAsFactors = FALSE, row.names = 1, header = TRUE, sep = ";", dec = ",") 
+## add a unique summit location id
+s.dat.all <- s.dat.all %>%
+  group_by(dataset, mountain_name, ycoord, xcoord, mtn_altitude) %>% ## reshape in first/last year of observation form
+  summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
+            last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
+  ungroup %>% 
+  mutate(unique_id = paste0("sds", 1:n())) ## add a unique summit id
+
 
 ## define a function to create pixels polygons ---------------------------------
 xy.pix.to.poly <- function(xy, res, proj4string = CRS("NA")){
@@ -113,21 +123,44 @@ xy.pix.to.poly <- function(xy, res, proj4string = CRS("NA")){
 }
 
 ## worldclim data --------------------------------------------------------------
-wc.dat <- raster("../DATA/climate/worldclim/alt.bil")
-wc.dat.cells <- raster::extract(wc.dat, s.dat.all[, c('xcoord', 'ycoord')], 
+
+# ## extend the DEM to be exactly on the same extent than wc V2
+# wc.dat <- raster("../DATA/climate/worldclim/alt.bil") ## the digital elevation model (extent      : -180, 180, -60, 90  (xmin, xmax, ymin, ymax))
+# wc.dat.2 <- raster("../DATA/climate/worldclim/wc2.0_30s_tavg/wc2.0_30s_tavg_01.tif") ## one mth mean temp layer (extent      : -180, 180, -90, 90  (xmin, xmax, ymin, ymax))
+# wc.dat <- extend(wc.dat, wc.dat.2)
+# writeRaster(wc.dat, filename = "../DATA/climate/worldclim/alt.grd")
+
+wc.dat <- raster("../DATA/climate/worldclim/alt.grd") ## the digital elevation model
+wc.dat.cells <- raster::extract(wc.dat, s.dat.all[, c('xcoord', 'ycoord')],
                        cellnumbers = TRUE, df = TRUE)
 wc.dat.extr <- cbind(wc.dat.cells, xyFromCell(wc.dat, wc.dat.cells$cells))
 wc.dat.extr <- wc.dat.extr %>% select(-1)
 colnames(wc.dat.extr) <- paste0("wc_", colnames(wc.dat.extr))
 ## extract wc polygons
-wc.poly <- xy.pix.to.poly(xy = wc.dat.extr[, c("wc_x", "wc_y")], 
+wc.poly <- xy.pix.to.poly(xy = wc.dat.extr[, c("wc_x", "wc_y")],
                           res = res(wc.dat)[1],
                           proj4string = CRS(projection(wc.dat)))
 names(wc.poly) <- s.dat.all$unique_id
 save(wc.poly, file = "wc.poly.RData")
 
+# ## chelsa data --------------------------------------------------------------
+# chelsa.dat <- raster("../DATA/climate/chealsea/CHELSA_bio_1.tif")
+# chelsa.dem <- raster("../DATA/climate/chealsea/mn30_grd/mn30_grd")
+# chelsa.dat.cells <- raster::extract(chelsa.dem, s.dat.all[, c('xcoord', 'ycoord')], 
+#                                 cellnumbers = TRUE, df = TRUE)
+# chelsa.dat.extr <- cbind(chelsa.dat.cells, xyFromCell(chelsa.dat, chelsa.dat.cells$cells))
+# chelsa.dat.extr <- chelsa.dat.extr %>% select(-1)
+# colnames(chelsa.dat.extr) <- paste0("chelsa_", colnames(chelsa.dat.extr))
+# ## extract che polygons
+# chelsa.poly <- xy.pix.to.poly(xy = chelsa.dat.extr[, c("chelsa_x", "chelsa_y")], 
+#                           res = res(chelsa.dat)[1],
+#                           proj4string = CRS(projection(chelsa.dat)))
+# names(chelsa.poly) <- s.dat.all$unique_id
+# save(chelsa.poly, file = "chelsa.poly.RData")
+
+
 ## cru data --------------------------------------------------------------------
-cru.dat <- raster("../DATA/climate/cru/cru_ts3.23.1901.2014.tmp.dat.nc")
+cru.dat <- raster("../DATA/climate/cru/cru_ts4.00.1901.2015.tmp.dat.nc/cru_ts4.00.1901.2015.tmp.dat.nc")
 cru.dat.cells <- raster::extract(cru.dat, s.dat.all[, c('xcoord', 'ycoord')], 
                                 cellnumbers = TRUE, df = TRUE)
 cru.dat.extr <- cbind(cru.dat.cells, xyFromCell(cru.dat, cru.dat.cells$cells))

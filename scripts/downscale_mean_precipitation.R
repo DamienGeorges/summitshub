@@ -10,16 +10,16 @@
 ##' @licence GPL 2.
 ##' ----------------------------------------------------------------------------
 
-setwd("J:/People/Damien/SUMMITS/WORKDIR")
+setwd("~/SUMMITS/WORKDIR/")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
 library(raster)
 library(rgdal)
-library(dplyr, lib.loc = "J:/People/Damien/R")
-library(tidyr, lib.loc = "J:/People/Damien/R")
-library(ggplot2, lib.loc = "J:/People/Damien/R")
-library(lazyeval, lib.loc = "J:/People/Damien/R")
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
 
 ## laod the climatic data comparaison table ------------------------------------
 dat.comp <- read.csv("comb.tab.out.prec.csv", stringsAsFactors = FALSE)
@@ -46,9 +46,6 @@ sites.in.dat <- dat.comp %>% filter(s1 == "cas", s2 == "wc") %>% select(s1Cell) 
 sites.in.dat.ref <- unique(dat.ref$casty_ref_id)
 all(as.character(sites.in.dat$s1Cell) == sites.in.dat.ref)
 
-##' add the wc delta alti info in ref data -------------------------------------
-dat.ref <- dat.ref %>% mutate(delta_wc_alti = mtn_altitude - wc_alt)
-
 ##' main downscale procedure ---------------------------------------------------
 
 ## add period column to dat table (1-12: month, 13: winter, 14: spring, 15: summer, 16: fall)
@@ -56,7 +53,7 @@ dat.comp <- dat.comp %>% mutate(period = ifelse(fm == lm, fm, ifelse(fm == -1, 1
 
 ## extract the delta wc table
 delta.wc.dat <- dat.comp %>% select(s1Cell, s1, s2, period, delta) %>% filter(s1 == 'wc') %>%
-  left_join(distinct(dat.ref[, c("unique_id", "wc_ref_id", "delta_wc_alti")]), by = c("s1Cell" = "wc_ref_id")) %>%
+  left_join(distinct(dat.ref[, c("unique_id", "wc_ref_id")]), by = c("s1Cell" = "wc_ref_id")) %>%
   mutate(clim_source = s2) %>% 
   select(unique_id, clim_source, period, delta)
 

@@ -11,12 +11,13 @@
 ##'   Comparisons will be conduc t considering our summits location and comparable
 ##'   area and time periods
 ##' @note 
-##'   our summit data cover the 1802 - 20014 period => we will not consider 
+##'   our summit data cover the 1802 - 2014 period => we will not consider 
 ##'   dates older than 1802 in this analyse
 ##' @licence GPL 2.
 ##' ----------------------------------------------------------------------------
 
-setwd("J:/People/Damien/SUMMITS/WORKDIR")
+# setwd("J:/People/Damien/SUMMITS/WORKDIR")
+setwd("~/SUMMITS/WORKDIR/")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -28,32 +29,36 @@ library(tidyr)
 ## dataset loading -------------------------------------------------------------
 
 ## worldclim
-##' @note worldlim: mean monthly temperature over 1950-2000 period (30s)
-wc.dat <- stack(paste0("../DATA/climate/worldclim/tmean_", 1:12, ".bil"))
+##' @note worldlim v2: mean monthly temperature over 1970-2000 period (30s)
+wc.dat <- stack(paste0("../DATA/climate/worldclim/wc2.0_30s_tavg/wc2.0_30s_tavg_", sprintf("%02d", 1:12), ".tif"))
+
+# ## chelsa
+# ##' @note chelsa: mean monthly temperature over 1979-2013 period (30s)
+# chelsa.dat <- stack(paste0("../DATA/climate/chelsa/CHELSA_temp_",1:10,"_1979-2013_V1.2_land.tif"))
 
 ## cru
-##' @note cru: mean monthly temperature for each year from 1901 to 2014 (0.5 deg)
-cru.dat <- stack("../DATA/climate/cru/cru_ts3.23.1901.2014.tmp.dat.nc")
+##' @note cru: mean monthly temperature for each year from 1901 to 2015 (0.5 deg)
+cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.tmp.dat.nc/cru_ts4.00.1901.2015.tmp.dat.nc")
 names(cru.dat) <- sub(".[[:digit:]]+$", "", names(cru.dat))
 
 ## xoplakis
 ##' @note xoplakis: season mean temperature for each year from 1500 to 2002 (0.5 deg)
 
 # ## produce individual rasters
-# xop.tab <- read.table("../DATA/climate/xoplakis/TT_Europe_1500_2002_New.GDX", 
-#                       header = FALSE, sep = "", row.names = 1, 
+# xop.tab <- read.table("../DATA/climate/xoplakis/TT_Europe_1500_2002_New.GDX",
+#                       header = FALSE, sep = "", row.names = 1,
 #                       stringsAsFactors = FALSE, na.strings = -999.99)
 # xop.grd <- raster("../DATA/climate/xoplakis/xoplakis_tmp_grid.grd")
 # ## create raster files of all xoplakis files of interest
 # xop.out.dir <- "../DATA/climate/xoplakis/indiv_raster"
 # dir.create(xop.out.dir, showWarnings = FALSE, recursive = TRUE)
-# year.to.consider <- 1800:2002
+# year.to.consider <- 1740:2002
 # season.to.consider <- 13:16
 # row.to.consider <- apply(expand.grid(year.to.consider, season.to.consider), 1, paste0, collapse = "")
 # row.to.consider <- as.character(sort(row.to.consider))
 # ll <- lapply(row.to.consider, function(x){
 #   cat("\n>", x)
-#   writeRaster(setValues(xop.grd, as.numeric(xop.tab[x, ])), 
+#   writeRaster(setValues(xop.grd, as.numeric(xop.tab[x, ])),
 #               filename = file.path(xop.out.dir, paste0("xop_", x, ".grd")),
 #               overwrite = TRUE)
 # })
@@ -83,18 +88,18 @@ names(xop.dat) <- sub(".grd$", "", basename(xop.files))
 # ## create raster files of all casty files of interest
 # cas.out.dir <- "../DATA/climate/casty/indiv_raster"
 # dir.create(cas.out.dir, showWarnings = FALSE, recursive = TRUE)
-# year.to.consider <- 1800:2000
+# year.to.consider <- 1766:2000
 # month.to.consider <- sprintf("%02d", 1:12)
 # row.to.consider <- apply(expand.grid(year.to.consider, month.to.consider), 1, paste0, collapse = "")
 # row.to.consider <- as.character(sort(row.to.consider))
 # ll <- lapply(row.to.consider[-length(row.to.consider)], function(x){
 #   cat("\n>", x)
-#   writeRaster(setValues(cas.grd, as.numeric(cas.tab[x, ])), 
+#   writeRaster(setValues(cas.grd, as.numeric(cas.tab[x, ])),
 #               filename = file.path(cas.out.dir, paste0("cas_", x, ".grd")),
 #               overwrite = TRUE)
 # })
 # cas.dat <- stack(file.path(cas.out.dir, paste0("cas_", row.to.consider[-length(row.to.consider)], ".grd")))
-# names(cas.dat) <- paste0("cas_", row.to.consider)
+# names(cas.dat) <- paste0("cas_", row.to.consider[-length(row.to.consider)])
 # rm(cas.tab, cas.grd)
 
 cas.files <- list.files("../DATA/climate/casty/indiv_raster", "*.grd$", full.names = TRUE)
@@ -104,8 +109,8 @@ names(cas.dat) <- sub(".grd$", "", basename(cas.files))
 ## read summit data locations --------------------------------------------------
 s.dat.all.cells <- read.csv("../DATA/summits/summits_coordinates_all_and_cells.csv",
                       stringsAsFactors = FALSE) 
-f.year <- min(s.dat.all.cells$first_year_of_record, na.rm = TRUE)
-l.year <- max(s.dat.all.cells$last_year_of_record, na.rm = TRUE)
+# f.year <- min(s.dat.all.cells$first_year_of_record, na.rm = TRUE)
+# l.year <- max(s.dat.all.cells$last_year_of_record, na.rm = TRUE)
 
 ## laod polygons associated to locations ---------------------------------------
 wc.poly.list <- get(load("../WORKDIR/wc.poly.RData"))
@@ -130,13 +135,13 @@ comp.tab.time.fct <- function(s1, s2){
   out.tab.yr <- out.tab.mth <- NULL
   ## determine year intersections
   if(is.element("wc", c(s1, s2))){
-    out.tab.yr$fy <- 1950
+    out.tab.yr$fy <- 1970
     out.tab.yr$ly <- 2000
   } else if(is.element("cru", c(s1, s2))){
     out.tab.yr$fy <- 1901:ifelse(is.element("xop", c(s1, s2)), 2002, 2000)
     out.tab.yr$ly <- out.tab.yr$fy
   } else {
-    out.tab.yr$fy <- out.tab.yr$ly <- 1800:2000
+    out.tab.yr$fy <- out.tab.yr$ly <- 1766:2000
   }
   out.tab.yr <- as.data.frame(out.tab.yr)
   ## determine month interesections
@@ -182,9 +187,9 @@ comp.tab <- comp.tab %>% rowwise %>%
 get.layer.to.extr.name <- function(s, fy, ly, fm, lm){
   if(s == "wc"){
     if(fm == -1 & lm == 2){ ## winter
-      str.out <- paste0("tmean_", c(12, 1, 2))
+      str.out <- paste0("wc2.0_30s_tavg_", sprintf("%02d", c(12, 1, 2)))
     } else {
-      str.out <- paste0("tmean_", fm:lm)
+      str.out <- paste0("wc2.0_30s_tavg_", sprintf("%02d", fm:lm))
     }
   }
   else if(s == "cru"){
@@ -222,7 +227,7 @@ comp.tab$s1.ncell <- comp.tab$s2.ncell <- comp.tab$s1.mean <-comp.tab$s2.mean <-
 ## parallel version
 library(foreach)
 library(doParallel)
-cl <- makeCluster(30)
+cl <- makeCluster(16)
 registerDoParallel(cl)
 s.name <- c("cru", "wc", "xop", "cas")
 to.export <- c(paste0(s.name, ".dat"), paste0(s.name, ".poly.list"))
@@ -270,7 +275,8 @@ comb.tab.out <- foreach(k = 1:nrow(comp.tab), .packages = c('raster'), .export =
 
 ## save the output
 save(comb.tab.out, file = "comb.tab.out.RData")
-comb.tab.out.df <- do.call(rbind, comb.tab.out)
+# comb.tab.out.df <- do.call(rbind, comb.tab.out)
+comb.tab.out.df <- dplyr::bind_rows(comb.tab.out)
 write.csv(comb.tab.out.df, file = "comb.tab.out.csv", row.names = FALSE)
 
 ## end of script

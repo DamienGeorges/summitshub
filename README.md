@@ -1,17 +1,22 @@
 # SUMMITS downscaled data presentation
 damien g. (damien.georges2 at gmail.com)  
-04/11/2015  
+16/05/2017  
 ## What is this document for?
 This document aims to present the downsclaled version of past temperature
 for mountains of the **SUMMITS** project. For each location **30s resolution**
-version of past monthly/seasonal mean  temperature have been produced based on 
-**cru_ts 3.23**, **casty 2007**, **Xoplaki 2005** downscaled according to the 
-latest version of **worldclim** data. 
+version of past monthly/seasonal mean  temperature (resp. precipitation) have been produced based on 
+**cru_ts 3.24**, **casty 2007**, **Xoplaki 2005** downscaled according to the 
+latest version of **worldclim 2.0** data. 
 
 ## where are the downscaled data?
 Data are currently stored on the Ecoinformatics network drive at the locataion :
 
+ - tempreatures
 [I:/C_Write/Damien/SUMMITS/OUTPUTS/summits_downsc_temp.csv](I:/C_Write/Damien/SUMMITS/OUTPUTS/summits_downsc_temp.csv)
+
+ - precipitations
+[I:/C_Write/Damien/SUMMITS/OUTPUTS/summits_downsc_precip.csv](I:/C_Write/Damien/SUMMITS/OUTPUTS/summits_downsc_temp.csv)
+
 
 ## What data has been used?
 The aim of this procedure is to produce 30s resolution monthly/seasonal mean 
@@ -21,12 +26,10 @@ temperature from 1800 to nowadays.
 The past mean temperature are originaly at 0.5deg resolution.
 We considered 3 different past temperature datasets:
 
- - **cru**: monthly mean temperature from 1900 to 2014 based on CRU_TS 3.23  
-    *download link*: [http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_3.23/](http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_3.23/)  
-    *ref*: Harris, I., Jones, P.D., Osborn, T.J. and Lister, D.H. (2014), Updated
-    high-resolution grids of monthly climatic observations the CRU TS3.10
-    Dataset. Int. J. Climatol., 34: 623642. doi: 10.1002/joc.3711  
-    *extra info*: refer to [Release_Notes_CRU_TS3.23_rev231015.txt](http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_3.23/Release_Notes_CRU_TS3.23_rev231015.txt)  
+ - **cru**: monthly mean temperature from 1900 to 2015 based on CRU_TS 4.00
+    *download link*: [http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_4.00/](http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_4.00/)  
+    *ref*: Harris et al. (2014) [doi:10.1002/joc.3711](http://onlinelibrary.wiley.com/doi/10.1002/joc.3711/abstract;jsessionid=BC60F2F96D7F1B47C304C57FA948E8E8.f02t04) 
+    *extra info*: refer to [Release_Notes_CRU_TS4.00.txt](https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.00/Release_Notes_CRU_TS4.00.txt)  
     
  - **cas**: monthly mean temperature from 1500 to 2000  
     *download link*: [http://www1.ncdc.noaa.gov/pub/data/paleo/historical/europe/casty2007/](http://www1.ncdc.noaa.gov/pub/data/paleo/historical/europe/casty2007/)
@@ -47,17 +50,15 @@ We considered 3 different past temperature datasets:
 
 ### Higher resolution data  
 To downscale the past climatic data from 0.5deg resolution to 30s resolution
-we used the **worldclim monthly mean temperature**.  
-*download link*: [http://www.worldclim.org/current](http://www.worldclim.org/current)  
-*ref*: Hijmans, R.J., S.E. Cameron, J.L. Parra, P.G. Jones and A. Jarvis, 2005. 
-Very high resolution interpolated climate surfaces for global land areas. 
-International Journal of Climatology 25: 1965-1978.  
+we used the **worldclim 2.0** **monthly average temperature** (tavg) and **monthly sum of precipitation**.  
+*download link*: [http://worldclim.org/version2](http://worldclim.org/version2)  
+*ref*: Fick, S.E. and R.J. Hijmans, 2017. Worldclim 2: New 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology 
 *extra info*: [http://www.worldclim.org/methods](http://www.worldclim.org/methods)
 
 
 **note**: we also used the **worldclim elevation** data to correct predicted 
  predicted temperature according to the differences between worlclim elevation
- and summits observed elevatrion (we use a **-0.5deg / 100m** correction factor)
+ and summits observed elevatrion (we use a **-0.6deg / 100m** correction factor)
  
 ## Downscale procedure
 Here is a schematic representation of the downscale procedure:  
@@ -68,13 +69,18 @@ The main downscaling procedure should be summarised in 3 main steps:
 
   1. Calculating the **&Delta; temp due to climatic source**: anomalies between worldclim and one of the past cliamtic dataset (PCD)
     + we extract the mean monthly temperature from WorldClim layer for one summit location
-    + we extract the mean temperature from PCD for the matching period (same month(s) from 1950 to 2000) and compute the average value
+    + we extract the mean temperature from PCD for the matching period (same month(s) from 1970 to 2000) and compute the average value
     + we deduce the anomaly associated to the PCD for this summit
     
   2. Calculating the **&Delta; temp due to elevation correction**: correction of temperature 
   according to altitudinal difference between woldclim elevation layer and the observed elevation of our summit
+  **IMPORTANTE NOTE**: The coefficient of correction due to altitude is now **-0.6/100m** as it is told in climatology
+  (potentiel ref: [Douguedroit et al. (1970)](http://www.persee.fr/doc/rga_0035-1121_1970_num_58_3_3491))
   
   3. Calculate the downscaled past temperature of our summit: we simply add the 2 &Delta; to the raw past temperature extraction
+  
+**IMPORTANTE NOTE**: We used exactly the same aproach for downscalling the precipitations data but without the elevational correction (step 2 above)
+
   
   
 ## Source code
@@ -90,6 +96,13 @@ Scripts workflow is the following (some scripts needs outputs of others to be ru
 Optionaly:
  - [climatic_sources_comparison_graphs.R](https://github.com/DamienGeorges/summitshub/tree/master/scripts/climatic_sources_comparison_graphs.R)  
  - [check_downscaled_mean_temperature.R](https://github.com/DamienGeorges/summitshub/tree/master/scripts/check_downscaled_mean_temperature.R) (to produce this document)
+ 
+The same way for the precipitations:
+  1. (should not be launch if already completed for temperatures downscaling) [cell_extraction_and_polygons.R](https://github.com/DamienGeorges/summitshub/tree/master/scripts/cell_extraction_and_polygons.R) 
+  2. [climatic_sources_comparison_prec.R](https://github.com/DamienGeorges/summitshub/tree/master/scripts/climatic_sources_comparison_prec.R)
+  3. [climatic_sources_mean_precip_extraction.R](https://github.com/DamienGeorges/summitshub/tree/master/scripts/climatic_sources_mean_precip_extraction.R)  
+  4. [downscale_mean_precipitation.R](https://github.com/DamienGeorges/summitshub/tree/master/scripts/downscale_mean_temperature.R) 
+
  
 ## Donwscaled data exploration
 

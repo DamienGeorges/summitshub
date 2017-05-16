@@ -13,7 +13,9 @@
 
 ##' @note Casty is a monthly database
 
-setwd("J:/People/Damien/SUMMITS/WORKDIR")
+# setwd("J:/People/Damien/SUMMITS/WORKDIR")
+setwd("~/SUMMITS/WORKDIR/")
+
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -46,7 +48,7 @@ xop.files <- list.files("../DATA/climate/xoplakis/indiv_raster", "*.grd$", full.
 xop.dat <- stack(xop.files)
 names(xop.dat) <- sub(".grd$", "", basename(xop.files))
 
-cru.dat <- stack("../DATA/climate/cru/cru_ts3.23.1901.2014.tmp.dat.nc")
+cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.tmp.dat.nc/cru_ts4.00.1901.2015.tmp.dat.nc")
 names(cru.dat) <- sub(".[[:digit:]]+$", "", names(cru.dat))
 
 ## extract the summits climatic data from rasters ------------------------------
@@ -58,29 +60,29 @@ xop.extr <- raster::extract(xop.dat, as.data.frame(dat.ref[, c("xcoord", "ycoord
                             method='simple', df = TRUE)
 
 ## reshape extractions ---------------------------------------------------------
-cas.extr.resh <- cas.extr %>% select(-ID) %>% bind_cols(dat.ref[, c("unique_id", "casty_ref_id")]) %>%
+cas.extr.resh <- cas.extr %>% dplyr::select(-ID) %>% bind_cols(dat.ref[, c("unique_id", "casty_ref_id")]) %>%
   mutate(clim_source = "cas", clim_source_ref_id = casty_ref_id) %>%
-  select(-casty_ref_id) %>%
+  dplyr::select(-casty_ref_id) %>%
   gather(key = date_str, value = mean_tmp, -c(unique_id, clim_source, clim_source_ref_id)) %>%
   mutate(year = as.numeric(sub("cas_", "", sub("([[:digit:]]{2})$", "", date_str))),
          period = as.numeric(sub("cas_[[:digit:]]{4}", "", date_str))) %>% 
-  select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
+  dplyr::select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
 
-cru.extr.resh <- cru.extr %>% select(-ID) %>% bind_cols(dat.ref[, c("unique_id", "cru_ref_id")]) %>%
+cru.extr.resh <- cru.extr %>% dplyr::select(-ID) %>% bind_cols(dat.ref[, c("unique_id", "cru_ref_id")]) %>%
   mutate(clim_source = "cru", clim_source_ref_id = cru_ref_id) %>%
-  select(-cru_ref_id) %>%
+  dplyr::select(-cru_ref_id) %>%
   gather(key = date_str, value = mean_tmp, -c(unique_id, clim_source, clim_source_ref_id)) %>%
   mutate(year = as.numeric(sub("^X", "", sub(".[[:digit:]]{2}$", "", date_str))),
          period = as.numeric(sub("^X[[:digit:]]{4}.", "", date_str))) %>% 
-  select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
+  dplyr::select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
 
-xop.extr.resh <- xop.extr %>% select(-ID) %>% bind_cols(dat.ref[, c("unique_id", "xoplakis_ref_id")]) %>%
+xop.extr.resh <- xop.extr %>% dplyr::select(-ID) %>% bind_cols(dat.ref[, c("unique_id", "xoplakis_ref_id")]) %>%
   mutate(clim_source = "xop", clim_source_ref_id = xoplakis_ref_id) %>%
-  select(-xoplakis_ref_id) %>%
+  dplyr::select(-xoplakis_ref_id) %>%
   gather(key = date_str, value = mean_tmp, -c(unique_id, clim_source, clim_source_ref_id)) %>%
   mutate(year = as.numeric(sub("xop_", "", sub("([[:digit:]]{2})$", "", date_str))),
          period = as.numeric(sub("xop_[[:digit:]]{4}", "", date_str))) %>% 
-  select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
+  dplyr::select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
 
 ## save a copy of workspace
 save.image("workspace_backup.RData")
@@ -95,7 +97,7 @@ load("workspace_backup.RData")
 
 calc_season_mean <- function(dsc){
   years_ <- sort(unique(dsc$year))
-  out.tab <- dsc %>% select(unique_id, clim_source, clim_source_ref_id, year) %>% as.data.frame %>% distinct
+  out.tab <- dsc %>% dplyr::select(unique_id, clim_source, clim_source_ref_id, year) %>% as.data.frame %>% distinct
   out.tab$winter_mean_tmp <- out.tab$spring_mean_tmp <- out.tab$summer_mean_tmp <- out.tab$fall_mean_tmp <- NA
   for(y_ in years_){
     out.tab$winter_mean_tmp[out.tab$year == y_] <- mean(c(dsc$mean_tmp[dsc$year == (y_ - 1) & dsc$period == 12],
@@ -106,7 +108,7 @@ calc_season_mean <- function(dsc){
   }
   out.tab <- out.tab %>% gather(key = "period_str", value = "mean_tmp", c(winter_mean_tmp, spring_mean_tmp, summer_mean_tmp, fall_mean_tmp)) %>%
     mutate(period = ifelse(period_str == "winter_mean_tmp", 13, ifelse(period_str == "spring_mean_tmp", 14, ifelse(period_str == "summer_mean_tmp", 15, 16)))) %>%
-    select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
+    dplyr::select(unique_id, clim_source, clim_source_ref_id, year, period, mean_tmp)
   return(out.tab)
 }
 
