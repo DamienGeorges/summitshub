@@ -151,9 +151,9 @@ comp.tab <- comp.tab %>% rowwise %>%
 get.layer.to.extr.name <- function(s, fy, ly, fm, lm){
   if(s == "wc"){
     if(fm == -1 & lm == 2){ ## winter
-      str.out <- paste0("wc2.0_30s_prec_", c(12, 1, 2))
+      str.out <- paste0("wc2.0_30s_prec_", sprintf("%02d", c(12, 1, 2)))
     } else {
-      str.out <- paste0("wc2.0_30s_prec_", fm:lm)
+      str.out <- paste0("wc2.0_30s_prec_", sprintf("%02d", fm:lm))
     }
   }
   else if(s == "cru"){
