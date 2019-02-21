@@ -14,7 +14,8 @@
 ##' ----------------------------------------------------------------------------
 
 ## setwd("J:/People/Damien/SUMMITS/WORKDIR")
-setwd("~/SUMMITS/WORKDIR/")
+## setwd("~/SUMMITS/WORKDIR/")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR/")
 
 rm(list = ls())
 
@@ -101,18 +102,23 @@ library(tidyr)
 
 
 ## laod the merged version of summits locations --------------------------------
-s.dat.all <- read.csv("../DATA/summits/mountains.csv",
-                        stringsAsFactors = FALSE, row.names = 1, header = TRUE, sep = ";", dec = ",") 
-## add a unique summit location id
-s.dat.all <- s.dat.all %>%
-  group_by(dataset, mountain_name, ycoord, xcoord, mtn_altitude) %>% ## reshape in first/last year of observation form
-  summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
-            last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
-  ungroup %>% 
-  mutate(unique_id = paste0("sds", 1:n())) ## add a unique summit id
+# s.dat.all <- read.csv("../DATA/summits/mountains.csv",
+#                         stringsAsFactors = FALSE, row.names = 1, header = TRUE, sep = ";", dec = ",") 
+# ## add a unique summit location id
+# s.dat.all <- s.dat.all %>%
+#   group_by(dataset, mountain_name, ycoord, xcoord, mtn_altitude) %>% ## reshape in first/last year of observation form
+#   summarise(first_year_of_record = min(year_of_record, na.rm = TRUE),
+#             last_year_of_record = max(year_of_record, na.rm = TRUE)) %>%
+#   ungroup %>% 
+#   mutate(unique_id = paste0("sds", 1:n())) ## add a unique summit id
 
+s.dat.aino <- readxl::read_xlsx("../DATA/summits/Mountain Data Damien.xlsx")
 
 ## define a function to create pixels polygons ---------------------------------
+s.dat.all <- 
+  s.dat.aino %>%
+  mutate(unique_id = paste0("sds", 1:n())) ## add a unique summit id
+
 xy.pix.to.poly <- function(xy, res, proj4string = CRS("NA")){
   lapply(1:nrow(xy), function(i){
     x_ <- xy[i, 1] + c(-res, res, res, -res, -res) / 2
@@ -131,8 +137,14 @@ xy.pix.to.poly <- function(xy, res, proj4string = CRS("NA")){
 # writeRaster(wc.dat, filename = "../DATA/climate/worldclim/alt.grd")
 
 wc.dat <- raster("../DATA/climate/worldclim/alt.grd") ## the digital elevation model
-wc.dat.cells <- raster::extract(wc.dat, s.dat.all[, c('xcoord', 'ycoord')],
-                       cellnumbers = TRUE, df = TRUE)
+# wc.dat <- raster("../DATA/climate/worldclim/30s/alt/alt") ## the digital elevation model
+wc.dat.cells <- 
+  raster::extract(
+    wc.dat, 
+    s.dat.all[, c('xcoord', 'ycoord')],
+    cellnumbers = TRUE, 
+    df = TRUE
+  )
 wc.dat.extr <- cbind(wc.dat.cells, xyFromCell(wc.dat, wc.dat.cells$cells))
 wc.dat.extr <- wc.dat.extr %>% select(-1)
 colnames(wc.dat.extr) <- paste0("wc_", colnames(wc.dat.extr))
@@ -160,7 +172,7 @@ save(wc.poly, file = "wc.poly.RData")
 
 
 ## cru data --------------------------------------------------------------------
-cru.dat <- raster("../DATA/climate/cru/cru_ts4.00.1901.2015.tmp.dat.nc/cru_ts4.00.1901.2015.tmp.dat.nc")
+cru.dat <- raster("../DATA/climate/cru/cru_ts4.02.1901.2017.tmp.dat.nc/data.nc")
 cru.dat.cells <- raster::extract(cru.dat, s.dat.all[, c('xcoord', 'ycoord')], 
                                 cellnumbers = TRUE, df = TRUE)
 cru.dat.extr <- cbind(cru.dat.cells, xyFromCell(cru.dat, cru.dat.cells$cells))

@@ -14,7 +14,8 @@
 ##' @note Casty is a monthly database
 
 # setwd("J:/People/Damien/SUMMITS/WORKDIR")
-setwd("~/SUMMITS/WORKDIR/")
+# setwd("~/SUMMITS/WORKDIR/")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR")
 
 rm(list = ls())
 
@@ -48,7 +49,7 @@ xop.files <- list.files("../DATA/climate/xoplakis/indiv_raster", "*.grd$", full.
 xop.dat <- stack(xop.files)
 names(xop.dat) <- sub(".grd$", "", basename(xop.files))
 
-cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.tmp.dat.nc/cru_ts4.00.1901.2015.tmp.dat.nc")
+cru.dat <- stack("../DATA/climate/cru/cru_ts4.02.1901.2017.tmp.dat.nc/data.nc")
 names(cru.dat) <- sub(".[[:digit:]]+$", "", names(cru.dat))
 
 ## extract the summits climatic data from rasters ------------------------------

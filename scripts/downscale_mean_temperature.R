@@ -14,7 +14,8 @@
 ##' ----------------------------------------------------------------------------
 
 # setwd("J:/People/Damien/SUMMITS/WORKDIR")
-setwd("~/SUMMITS/WORKDIR/")
+# setwd("~/SUMMITS/WORKDIR/")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -39,13 +40,14 @@ dat.ref <- read.csv("../DATA/summits/summits_coordinates_all_and_cells.csv",
 head(dat.ref)
 
 ## add the wc ref cell id
-dat.ref <- dat.ref %>% group_by(wc_cells) %>% mutate(wc_ref_id = first(unique_id))
+dat.ref <- dat.ref %>% group_by(wc_cells) %>% mutate(wc_ref_id = first(unique_id)) %>% ungroup()
 ## add the casty ref cell id
-dat.ref <- dat.ref %>% group_by(casty_cells) %>% mutate(casty_ref_id = first(unique_id))
+dat.ref <- dat.ref %>% group_by(casty_cells) %>% mutate(casty_ref_id = first(unique_id)) %>% ungroup()
 ## add the cru ref cell id
-dat.ref <- dat.ref %>% group_by(cru_cells) %>% mutate(cru_ref_id = first(unique_id))
+dat.ref <- dat.ref %>% group_by(cru_cells) %>% mutate(cru_ref_id = first(unique_id)) %>% ungroup()
 ## add the xoplakis ref cell id
-dat.ref <- dat.ref %>% group_by(xoplakis_cells) %>% mutate(xoplakis_ref_id = first(unique_id))
+dat.ref <- dat.ref %>% group_by(xoplakis_cells) %>% mutate(xoplakis_ref_id = first(unique_id)) %>% ungroup()
+
 
 ## check that sites matched
 sites.in.dat <- dat.comp %>% filter(s1 == "cas", s2 == "wc") %>% dplyr::select(s1Cell) %>% distinct
@@ -75,7 +77,8 @@ tmp.dwsc <- tmp.dwsc %>%
   mutate(mean_tmp_dwsc = mean_tmp + delta_corrected)
 
 ## clean the output table
-tmp.dwsc <- tmp.dwsc %>% 
+tmp.dwsc <- 
+  tmp.dwsc %>% 
   mutate(mountain_id = unique_id) %>%
   dplyr::select(mountain_id, clim_source, year, period, mean_tmp_dwsc) %>%
   left_join(dat.ref %>% dplyr::select(mountain_name, ycoord, xcoord, mtn_altitude, unique_id), by = c("mountain_id" = "unique_id")) %>%

@@ -17,7 +17,9 @@
 ##' ----------------------------------------------------------------------------
 
 # setwd("J:/People/Damien/SUMMITS/WORKDIR")
-setwd("~/SUMMITS/WORKDIR/")
+# setwd("~/SUMMITS/WORKDIR/")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR")
+
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -40,7 +42,8 @@ wc.dat <- stack(paste0("../DATA/climate/worldclim/wc2.0_30s_tavg/wc2.0_30s_tavg_
 
 ## cru
 ##' @note cru: mean monthly temperature for each year from 1901 to 2015 (0.5 deg)
-cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.tmp.dat.nc/cru_ts4.00.1901.2015.tmp.dat.nc")
+# cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.tmp.dat.nc/cru_ts4.00.1901.2015.tmp.dat.nc")
+cru.dat <- stack("../DATA/climate/cru/cru_ts4.02.1901.2017.tmp.dat.nc/data.nc")
 names(cru.dat) <- sub(".[[:digit:]]+$", "", names(cru.dat))
 
 ## xoplakis
@@ -229,7 +232,7 @@ comp.tab$s1.ncell <- comp.tab$s2.ncell <- comp.tab$s1.mean <-comp.tab$s2.mean <-
 ## parallel version
 library(foreach)
 library(doParallel)
-cl <- makeCluster(16)
+cl <- makeCluster(8)
 registerDoParallel(cl)
 s.name <- c("cru", "wc", "xop", "cas")
 to.export <- c(paste0(s.name, ".dat"), paste0(s.name, ".poly.list"))

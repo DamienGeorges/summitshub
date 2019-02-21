@@ -13,7 +13,7 @@
 ##' This document aims to present the downsclaled version of past temperature
 ##' for mountains of the **SUMMITS** project. For each location **30s resolution**
 ##' version of past monthly/seasonal mean  temperature have been produced based on 
-##' **cru_ts 3.23**, **casty 2007**, **Xoplaki 2005** downscaled according to the 
+##' **cru_ts 4.02**, **casty 2007**, **Xoplaki 2005** downscaled according to the 
 ##' latest version of **worldclim** data. 
 ##' 
 
@@ -31,8 +31,8 @@
 ##' The past mean temperature are originaly at 0.5deg resolution.
 ##' We considered 3 different past temperature datasets:
 ##' 
-##'  - **cru**: monthly mean temperature from 1900 to 2014 based on CRU_TS 3.23  
-##'     *download link*: [http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_3.23/](http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_3.23/)  
+##'  - **cru**: monthly mean temperature from 1900 to 2014 based on CRU_TS 4.02  
+##'     *download link*: [http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_4.02/](http://www.cru.uea.ac.uk/cru/data/hrg/cru_ts_3.23/)  
 ##'     *ref*: Harris, I., Jones, P.D., Osborn, T.J. and Lister, D.H. (2014), Updated
 ##'     high-resolution grids of monthly climatic observations the CRU TS3.10
 ##'     Dataset. Int. J. Climatol., 34: 623642. doi: 10.1002/joc.3711  
@@ -67,7 +67,7 @@
 ##' 
 ##' **note**: we also used the **worldclim elevation** data to correct predicted 
 ##'  predicted temperature according to the differences between worlclim elevation
-##'  and summits observed elevatrion (we use a **-0.5deg / 100m** correction factor)
+##'  and summits observed elevatrion (we use a **-0.6deg / 100m** correction factor)
 ##'  
 
 ##' ## Downscale procedure
@@ -106,7 +106,7 @@
 
 
 ##' ## Donwscaled data exploration
-setwd("J:/People/Damien/SUMMITS/WORKDIR")
+# setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR/")
 rm(list = ls())
 
 ##' ### load libraries 
@@ -119,7 +119,7 @@ library(ggplot2)
 ##' Downscaled data are stored within [summits_downsc_temp.csv]() file.
 
 # tmp.dwsc <- read.csv("../OUTPUTS/summits_downsc_temp.csv")
-tmp.dwsc <- read.csv("I:/C_Write/Damien/SUMMITS/OUTPUTS/summits_downsc_temp.csv")
+tmp.dwsc <- read.csv("/mnt/data/georgesd/_PROJECTS/SUMMITS/OUTPUTS/summits_downsc_temp.csv")
 head(tmp.dwsc)
 
 ##' In this file we have:  
@@ -173,4 +173,4 @@ mont_ids <- tmp.dwsc %>% select(mountain_id, mountain_name, ycoord, xcoord, mtn_
 ##+ , results='asis'
 knitr::kable(mont_ids)
 
-##' **note:** As you can see some sites have been replicated because of name encoding..
+##' **note:** Some sites might have been replicated because of name encoding..

@@ -10,7 +10,7 @@
 ##' @licence GPL 2.
 ##' ----------------------------------------------------------------------------
 
-setwd("~/SUMMITS/WORKDIR")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -33,13 +33,13 @@ dat.ref <- read.csv("../DATA/summits/summits_coordinates_all_and_cells.csv",
 head(dat.ref)
 
 ## add the wc ref cell id
-dat.ref <- dat.ref %>% group_by(wc_cells) %>% mutate(wc_ref_id = first(unique_id))
+dat.ref <- dat.ref %>% group_by(wc_cells) %>% mutate(wc_ref_id = first(unique_id)) %>% ungroup()
 ## add the casty ref cell id
-dat.ref <- dat.ref %>% group_by(casty_cells) %>% mutate(casty_ref_id = first(unique_id))
-## add the cru ref cell id
-dat.ref <- dat.ref %>% group_by(cru_cells) %>% mutate(cru_ref_id = first(unique_id))
+dat.ref <- dat.ref %>% group_by(casty_cells) %>% mutate(casty_ref_id = first(unique_id)) %>% ungroup()
+## add the cru ref cell id 
+dat.ref <- dat.ref %>% group_by(cru_cells) %>% mutate(cru_ref_id = first(unique_id)) %>% ungroup()
 ## add the xoplakis ref cell id
-dat.ref <- dat.ref %>% group_by(xoplakis_cells) %>% mutate(xoplakis_ref_id = first(unique_id))
+dat.ref <- dat.ref %>% group_by(xoplakis_cells) %>% mutate(xoplakis_ref_id = first(unique_id)) %>% ungroup()
 
 ## check that sites matched
 sites.in.dat <- dat.comp %>% filter(s1 == "cas", s2 == "wc") %>% select(s1Cell) %>% distinct

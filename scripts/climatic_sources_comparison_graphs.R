@@ -5,7 +5,7 @@
 ##' @project SUMMITS
 ##' @description Here we will compare the following data source:
 ##'     - worldclim
-##'     - cru TS 3.23
+##'     - cru TS 4.02
 ##'     - casty 2007
 ##'     - Xoplakis 
 ##'   Comparisons will be conduc t considering our summits location and comparable
@@ -16,7 +16,8 @@
 ##' @licence GPL 2.
 ##' ----------------------------------------------------------------------------
 
-setwd("J:/People/Damien/SUMMITS/WORKDIR")
+# setwd("J:/People/Damien/SUMMITS/WORKDIR")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -44,14 +45,20 @@ empty <- ggplot() +
         axis.ticks = element_blank(), legend.position="none")
 
 ## delta temp with worldclim
-gg_wc <- dat %>% select(s1, s2, fy, ly, fm, lm, delta) %>%
+gg_wc <- 
+  dat %>% 
+  select(s1, s2, fy, ly, fm, lm, delta) %>%
   filter(s2 == "wc") %>% 
-  ggplot(aes(x = s1, y = delta)) + geom_boxplot() 
+  ggplot(aes(x = s1, y = delta)) + 
+  geom_boxplot() 
 gg_wc
 
 ## delta temp with xoplakis
-gg_xop <- dat %>% select(s1, s2, fy, ly, fm, lm, delta) %>%
-  filter(s2 == "xop", s1 != "wc", fy == ly) %>% na.omit %>%
+gg_xop <- 
+  dat %>% 
+  select(s1, s2, fy, ly, fm, lm, delta) %>%
+  filter(s2 == "xop", s1 != "wc", fy == ly) %>% 
+  na.omit() %>%
   ggplot(aes(x = as.factor(fy), y = delta, colour = as.factor(fm))) + 
-  geom_boxplot() +
+  geom_boxplot() 
 gg_xop

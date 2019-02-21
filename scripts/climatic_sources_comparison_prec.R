@@ -15,7 +15,7 @@
 ##' ----------------------------------------------------------------------------
 
 # setwd("J:/People/Damien/SUMMITS/WORKDIR")
-setwd("~/SUMMITS/WORKDIR/")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -32,7 +32,7 @@ wc.dat <- stack(paste0("../DATA/climate/worldclim/wc2.0_30s_prec/wc2.0_30s_prec_
 
 ## cru
 ##' @note cru: mean monthly temperature for each year from 1901 to 2015 (0.5 deg)
-cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.pre.dat.nc/cru_ts4.00.1901.2015.pre.dat.nc")
+cru.dat <- stack("../DATA/climate/cru/cru_ts4.02.1901.2017.pre.dat.nc/data.nc")
 names(cru.dat) <- sub(".[[:digit:]]+$", "", names(cru.dat))
 
 ## casty

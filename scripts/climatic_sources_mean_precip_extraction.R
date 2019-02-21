@@ -11,7 +11,7 @@
 ##' ----------------------------------------------------------------------------
 
 # setwd("J:/People/Damien/SUMMITS/WORKDIR")
-setwd("~/SUMMITS/WORKDIR/")
+setwd("/mnt/data/georgesd/_PROJECTS/SUMMITS/WORKDIR")
 rm(list = ls())
 
 ## load libraries --------------------------------------------------------------
@@ -36,7 +36,7 @@ dat.ref <- dat.ref %>% group_by(cru_cells) %>% mutate(cru_ref_id = first(unique_
 dat.ref <- dat.ref %>% group_by(xoplakis_cells) %>% mutate(xoplakis_ref_id = first(unique_id))
 
 ## load all climatic data we want to downscale ---------------------------------
-cru.dat <- stack("../DATA/climate/cru/cru_ts4.00.1901.2015.pre.dat.nc/cru_ts4.00.1901.2015.pre.dat.nc")
+cru.dat <- stack("../DATA/climate/cru/cru_ts4.02.1901.2017.pre.dat.nc/data.nc")
 names(cru.dat) <- sub(".[[:digit:]]+$", "", names(cru.dat))
 
 cas.files <- list.files("../DATA/climate/casty/indiv_raster_prec", "*.grd$", full.names = TRUE)
